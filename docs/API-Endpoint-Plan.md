@@ -69,6 +69,10 @@ The API has 19 endpoints across 6 categories:
 - I kept the routes pretty simple and readable. The nesting makes it clear which event a category or result belongs to.
 - The DELETE endpoints return 204 No Content instead of 200 because there is nothing to send back.
 - Error responses include a message that explains what went wrong so the front-end can show it to the user.
+- The login endpoint returns a JWT token that must be included in all authenticated requests.
+- Public endpoints (like GET /api/events) can be accessed by anyone, even without a token.
+- Organiser endpoints check that the user owns the resource before allowing changes.
+- Participant endpoints check that the user is only modifying their own enrolments.
 
 ## Endpoint Count Summary
 
