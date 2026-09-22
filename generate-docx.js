@@ -31,6 +31,7 @@ function cell(text, width, isHeader = false) {
 }
 
 // The endpoint data
+// Each array contains: [HTTP Method, Route, Description, Role Required, Request Body, Expected Response]
 const endpoints = [
     ["POST", "/api/auth/register", "Creates a new user account. The user picks whether they are an Organiser or Participant during signup.", "None (public)", '{ "fullName": "string", "email": "string", "password": "string", "role": "Organiser or Participant" }', "201 Created - returns the new user ID and a success message. 400 Bad Request - if email is already taken or fields are missing."],
     ["POST", "/api/auth/login", "Signs the user in and returns a JWT token they use for authenticated requests.", "None (public)", '{ "email": "string", "password": "string" }', "200 OK - returns a JWT token and user info. 401 Unauthorized - if email or password is wrong."],
