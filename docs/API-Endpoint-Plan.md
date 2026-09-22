@@ -60,6 +60,18 @@ This document lists all the API endpoints that the RaceDay system will expose. T
 - The DELETE endpoints return 204 No Content instead of 200 because there is nothing to send back.
 - Error responses include a message that explains what went wrong so the front-end can show it to the user.
 
+## Endpoint Count Summary
+
+| Category | Number of Endpoints |
+|----------|-------------------|
+| Authentication | 2 |
+| User Profile | 2 |
+| Events | 5 |
+| Categories | 4 |
+| Enrolments | 3 |
+| Results | 3 |
+| **Total** | **19** |
+
 ---
 
 *Note: AI tools were used to assist with planning and drafting this document.*
