@@ -127,6 +127,9 @@ VALUES
     ('Emily van der Merwe', 'emily@gmail.com', 'hashed_pw_012', 'Participant', '2026-03-20');
 
 -- Insert 3 Events
+-- Event 1 is created by Thabo (OrganiserID = 1)
+-- Event 2 is created by Nadia (OrganiserID = 2)
+-- Event 3 is also by Thabo
 INSERT INTO Events (OrganiserID, EventName, Description, EventDate, Location, IsActive)
 VALUES
     (1, 'Soweto Marathon 2026', 'Annual marathon through the streets of Soweto. 42km, 21km and 10km options.', '2026-11-15', 'Soweto, Johannesburg', 1),
@@ -134,6 +137,7 @@ VALUES
     (1, 'Comrades Marathon 2027', 'The Ultimate Human Race. Pietermaritzburg to Durban.', '2027-06-13', 'Pietermaritzburg to Durban', 1);
 
 -- Insert Categories for Event 1 (Soweto Marathon)
+-- Three distance options with different entry fees and capacity limits
 INSERT INTO Categories (EventID, CategoryName, MaxParticipants, EntryFee)
 VALUES
     (1, '42.2km Marathon', 5000, 450.00),
