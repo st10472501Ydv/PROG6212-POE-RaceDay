@@ -1,0 +1,83 @@
+name: Validate POE Structure
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Check docs folder exists
+      run: |
+        if [ ! -d "docs" ]; then
+          echo "Error: /docs folder is missing"
+          exit 1
+        fi
+        echo "docs folder found"
+
+    - name: Check ERD file exists
+      run: |
+        if [ ! -f "docs/ERD.md" ]; then
+          echo "Error: docs/ERD.md is missing"
+          exit 1
+        fi
+        echo "ERD file found"
+
+    - name: Check API Endpoint Plan exists
+      run: |
+        if [ ! -f "docs/API-Endpoint-Plan.md" ]; then
+          echo "Error: docs/API-Endpoint-Plan.md is missing"
+          exit 1
+        fi
+        echo "API Endpoint Plan found"
+
+    - name: Check SQL script exists
+      run: |
+        if [ ! -f "docs/RaceDay-Database.sql" ]; then
+          echo "Error: docs/RaceDay-Database.sql is missing"
+          exit 1
+        fi
+        echo "SQL script found"
+
+    - name: Check README exists
+      run: |
+        if [ ! -f "README.md" ]; then
+          echo "Error: README.md is missing"
+          exit 1
+        fi
+        echo "README found"
+
+    - name: Validate SQL syntax
+      run: |
+        echo "Checking SQL file for basic syntax..."
+        if grep -q "CREATE TABLE" docs/RaceDay-Database.sql; then
+          echo "CREATE TABLE statements found"
+        else
+          echo "Error: No CREATE TABLE statements found"
+          exit 1
+        fi
+        if grep -q "INSERT INTO" docs/RaceDay-Database.sql; then
+          echo "INSERT statements found"
+        else
+          echo "Error: No INSERT statements found"
+          exit 1
+        fi
+
+    - name: Validate ERD has Mermaid code
+      run: |
+        if grep -q "```mermaid" docs/ERD.md; then
+          echo "Mermaid code block found in ERD"
+        else
+          echo "Error: No Mermaid code block in ERD.md"
+          exit 1
+        fi
+
+    - name: All checks passed
+      run: echo "All validation checks passed!"
