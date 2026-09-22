@@ -75,12 +75,12 @@ After the event takes place, organisers capture the results. Each enrolment can 
 
 ## Relationships
 
-- **Users to OrganiserDetails**: One-to-One. An organiser user has one record in OrganiserDetails.
-- **Users to Events**: One-to-Many. One organiser can create many events.
-- **Events to Categories**: One-to-Many. One event has many categories.
-- **Categories to Enrolments**: One-to-Many. One category can have many participants enrolled.
-- **Users to Enrolments**: One-to-Many. One participant can enrol in many categories.
-- **Enrolments to Results**: One-to-One. Each enrolment gets one result.
+- **Users to OrganiserDetails**: One-to-One. An organiser user has one record in OrganiserDetails. If the user is a Participant, they have no record in this table.
+- **Users to Events**: One-to-Many. One organiser can create many events. Each event belongs to exactly one organiser.
+- **Events to Categories**: One-to-Many. One event has many categories (like 5km, 10km, 21km). Each category belongs to exactly one event.
+- **Categories to Enrolments**: One-to-Many. One category can have many participants enrolled. Each enrolment is for exactly one category.
+- **Users to Enrolments**: One-to-Many. One participant can enrol in many categories across different events. Each enrolment belongs to exactly one participant.
+- **Enrolments to Results**: One-to-One. Each enrolment gets one result after the event. Not every enrolment will have a result yet if the event has not happened.
 
 ## Mermaid ERD Code
 
