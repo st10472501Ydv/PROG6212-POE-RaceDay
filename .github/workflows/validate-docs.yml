@@ -69,6 +69,13 @@ jobs:
           echo "Error: No INSERT statements found"
           exit 1
         fi
+        # Count CREATE TABLE statements (should be at least 6)
+        table_count=$(grep -c "CREATE TABLE" docs/RaceDay-Database.sql)
+        echo "Found $table_count CREATE TABLE statements"
+        if [ "$table_count" -lt 6 ]; then
+          echo "Error: Expected at least 6 CREATE TABLE statements, found $table_count"
+          exit 1
+        fi
 
     - name: Validate ERD has Mermaid code
       run: |
@@ -78,6 +85,14 @@ jobs:
           echo "Error: No Mermaid code block in ERD.md"
           exit 1
         fi
+
+    - name: Check Word document exists
+      run: |
+        if [ ! -f "docs/API-Endpoint-Plan.docx" ]; then
+          echo "Error: docs/API-Endpoint-Plan.docx is missing"
+          exit 1
+        fi
+        echo "Word document found"
 
     - name: All checks passed
       run: echo "All validation checks passed!"
