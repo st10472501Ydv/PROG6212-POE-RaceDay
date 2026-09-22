@@ -28,10 +28,13 @@ RaceDay-POE/
 ├── docs/
 │   ├── ERD.md                    # Entity Relationship Diagram with Mermaid code
 │   ├── API-Endpoint-Plan.md      # Full API endpoint specification
+│   ├── API-Endpoint-Plan.docx    # Word version of the API plan
 │   └── RaceDay-Database.sql      # SQL Server script to create and seed the database
 ├── .github/
 │   └── workflows/
 │       └── validate-docs.yml     # CI/CD workflow that validates repo structure
+├── generate-docx.js              # Script to generate the Word document
+├── package.json                  # Node.js dependencies for docx generation
 └── README.md
 ```
 
