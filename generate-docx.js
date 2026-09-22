@@ -55,6 +55,8 @@ const endpoints = [
 ];
 
 // Column widths (total = 9360 for US Letter with 1" margins)
+// The widths are in DXA units (1 inch = 1440 DXA)
+// Page width: 12240 DXA, margins: 1440 each side = 9360 content width
 // Method: 900, Route: 1800, Desc: 2200, Role: 1100, Body: 1660, Response: 1700
 const colWidths = [900, 1800, 2200, 1100, 1660, 1700];
 
