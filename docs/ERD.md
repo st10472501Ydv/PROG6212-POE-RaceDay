@@ -151,6 +151,14 @@ I went with 6 entities because that is the minimum the rubric asks for. The Orga
 
 The Role field in Users is a simple string. I thought about making a separate Roles table, but for this project a string is fine since there are only two roles.
 
+## How to Render the ERD
+
+1. Go to [mermaid.live](https://mermaid.live)
+2. Copy the Mermaid code from above
+3. Paste it into the editor
+4. The diagram will render automatically
+5. You can export it as a PNG or SVG image
+
 ---
 
 *Note: AI tools were used to help with planning and drafting this document.*
