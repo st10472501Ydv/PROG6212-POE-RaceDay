@@ -1,0 +1,27 @@
+{
+  "name": "raceday-poe",
+  "version": "1.0.0",
+  "description": "RaceDay is a web-based event management system for South African road running, walking, and cycling events. The platform lets Organisers create and manage events, while Participants can browse, enter events, and track their results.",
+  "main": "generate-docx.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/st10472501Ydv/RaceDay-POE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/st10472501Ydv/RaceDay-POE/issues"
+  },
+  "homepage": "https://github.com/st10472501Ydv/RaceDay-POE#readme",
+  "dependencies": {
+    "docx": "^9.7.1"
+  }
+}
