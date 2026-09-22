@@ -151,6 +151,10 @@ I went with 6 entities because that is the minimum the rubric asks for. The Orga
 
 The Role field in Users is a simple string. I thought about making a separate Roles table, but for this project a string is fine since there are only two roles.
 
+The UQ_ParticipantCategory unique constraint on Enrolments stops a participant from enrolling in the same category twice. This makes sense because you would not want to pay for the same race twice.
+
+I used ON DELETE CASCADE on some foreign keys (like OrganiserDetails and Categories) so that when you delete a parent record, the child records go with it. But I did not use cascade on Events because if you delete an organiser, you probably still want to keep the events they created.
+
 ## How to Render the ERD
 
 1. Go to [mermaid.live](https://mermaid.live)
