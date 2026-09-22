@@ -1,3 +1,8 @@
+// generate-docx.js
+// This script creates the Word document version of the API Endpoint Plan
+// Run with: node generate-docx.js
+// Requires: npm install docx
+
 const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
         Header, Footer, AlignmentType, HeadingLevel, BorderStyle, WidthType, 
         ShadingType, PageNumber, PageBreak, FootnoteReferenceRun } = require('docx');
