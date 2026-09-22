@@ -92,36 +92,36 @@ Copy the code below into a Mermaid renderer (like mermaid.live) to see the diagr
 erDiagram
     USERS {
         int UserID PK
-        varchar FullName
-        varchar Email UK
-        varchar PasswordHash
-        varchar Role
+        string FullName
+        string Email UK
+        string PasswordHash
+        string Role
         datetime DateJoined
     }
 
     ORGANISERDETAILS {
-        int OrganiserID PK, FK
-        varchar ClubName
-        varchar PhoneNumber
-        varchar Bio
+        int OrganiserID PK
+        string ClubName
+        string PhoneNumber
+        string Bio
     }
 
     EVENTS {
         int EventID PK
         int OrganiserID FK
-        varchar EventName
-        varchar Description
+        string EventName
+        string Description
         datetime EventDate
-        varchar Location
-        bit IsActive
+        string Location
+        int IsActive
     }
 
     CATEGORIES {
         int CategoryID PK
         int EventID FK
-        varchar CategoryName
+        string CategoryName
         int MaxParticipants
-        decimal EntryFee
+        float EntryFee
     }
 
     ENROLMENTS {
@@ -134,9 +134,9 @@ erDiagram
     RESULTS {
         int ResultID PK
         int EnrolmentID FK
-        time FinishTime
+        string FinishTime
         int Position
-        varchar Status
+        string Status
     }
 
     USERS ||--o| ORGANISERDETAILS : "has details"
@@ -146,6 +146,7 @@ erDiagram
     USERS ||--o{ ENROLMENTS : "enrols in"
     ENROLMENTS ||--o| RESULTS : "has"
 ```
+The same code is saved as ERD.mmd in this folder. It was rendered to ERD.png with mermaid-cli.
 
 ## Design Notes
 
@@ -167,6 +168,12 @@ To view or re-render it:
 3. Paste it into the editor
 4. The diagram will render automatically
 5. You can export it as a PNG or SVG image
+
+## References
+
+- Connolly, T. and Begg, C. (2015) *Database Systems: A Practical Approach to Design, Implementation, and Management*. 6th ed. Harlow: Pearson.
+- Microsoft (2026) CREATE TABLE (Transact-SQL). Available at: https://learn.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql (Accessed: 22 September 2026).
+- Mermaid (2026) Entity Relationship Diagrams. Available at: https://mermaid.js.org/syntax/entityRelationshipDiagram.html (Accessed: 22 September 2026).
 
 ---
 

@@ -140,7 +140,7 @@ VALUES
 INSERT INTO Events (OrganiserID, EventName, Description, EventDate, Location, IsActive)
 VALUES
     (1, 'Soweto Marathon 2026', 'Annual marathon through the streets of Soweto. 42km, 21km and 10km options.', '2026-11-15', 'Soweto, Johannesburg', 1),
-    (2, 'Cape Town Cycle Tour', 'The world最大的single-day cycling event. Routes around the Cape Peninsula.', '2026-10-08', 'Cape Town Stadium, Cape Town', 1),
+    (2, 'Cape Town Cycle Tour', 'The biggest single-day cycling event in the world. Routes around the Cape Peninsula.', '2026-10-08', 'Cape Town Stadium, Cape Town', 1),
     (1, 'Comrades Marathon 2027', 'The Ultimate Human Race. Pietermaritzburg to Durban.', '2027-06-13', 'Pietermaritzburg to Durban', 1);
 
 -- Insert Categories for Event 1 (Soweto Marathon)

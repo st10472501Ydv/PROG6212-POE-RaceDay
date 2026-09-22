@@ -200,7 +200,25 @@ const doc = new Document({
                 spacing: { after: 200 },
                 children: [new TextRun("- Error responses include a message that explains what went wrong so the front-end can show it to the user.")]
             }),
-            
+
+            // References section
+            new Paragraph({
+                heading: HeadingLevel.HEADING_2,
+                children: [new TextRun("References")]
+            }),
+            new Paragraph({
+                spacing: { after: 120 },
+                children: [new TextRun("Microsoft (2026) ASP.NET Core web API documentation. Available at: https://learn.microsoft.com/en-us/aspnet/core/web-api/")]
+            }),
+            new Paragraph({
+                spacing: { after: 120 },
+                children: [new TextRun("Microsoft (2026) JWT bearer authentication in ASP.NET Core. Available at: https://learn.microsoft.com/en-us/aspnet/core/security/authentication/")]
+            }),
+            new Paragraph({
+                spacing: { after: 200 },
+                children: [new TextRun("Fielding, R. (2000) Architectural Styles and the Design of Network-based Software Architectures. PhD thesis. University of California, Irvine.")]
+            }),
+
             // AI Disclosure
             new Paragraph({
                 spacing: { before: 400 },

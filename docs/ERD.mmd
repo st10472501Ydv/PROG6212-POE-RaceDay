@@ -1,51 +1,51 @@
 erDiagram
     USERS {
-        int UserID
-        varchar FullName
-        varchar Email
-        varchar PasswordHash
-        varchar Role
+        int UserID PK
+        string FullName
+        string Email UK
+        string PasswordHash
+        string Role
         datetime DateJoined
     }
 
     ORGANISERDETAILS {
-        int OrganiserID
-        varchar ClubName
-        varchar PhoneNumber
-        varchar Bio
+        int OrganiserID PK
+        string ClubName
+        string PhoneNumber
+        string Bio
     }
 
     EVENTS {
-        int EventID
-        int OrganiserID
-        varchar EventName
-        varchar Description
+        int EventID PK
+        int OrganiserID FK
+        string EventName
+        string Description
         datetime EventDate
-        varchar Location
-        bit IsActive
+        string Location
+        int IsActive
     }
 
     CATEGORIES {
-        int CategoryID
-        int EventID
-        varchar CategoryName
+        int CategoryID PK
+        int EventID FK
+        string CategoryName
         int MaxParticipants
-        decimal EntryFee
+        float EntryFee
     }
 
     ENROLMENTS {
-        int EnrolmentID
-        int ParticipantID
-        int CategoryID
+        int EnrolmentID PK
+        int ParticipantID FK
+        int CategoryID FK
         datetime EnrolmentDate
     }
 
     RESULTS {
-        int ResultID
-        int EnrolmentID
-        time FinishTime
+        int ResultID PK
+        int EnrolmentID FK
+        string FinishTime
         int Position
-        varchar Status
+        string Status
     }
 
     USERS ||--o| ORGANISERDETAILS : "has details"

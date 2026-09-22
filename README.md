@@ -99,6 +99,12 @@ The video covers:
 - No AI-generated voices are allowed
 - Video link must be included in this README
 
+## References
+
+- Connolly, T. and Begg, C. (2015) *Database Systems*. 6th ed. Harlow: Pearson.
+- Microsoft (2026) ASP.NET Core web API documentation. Available at: https://learn.microsoft.com/en-us/aspnet/core/web-api/ (Accessed: 22 September 2026).
+- Mermaid (2026) Entity Relationship Diagrams. Available at: https://mermaid.js.org/syntax/entityRelationshipDiagram.html (Accessed: 22 September 2026).
+
 ## AI Disclosure
 
 AI tools were used to assist with planning and drafting documentation in this project.

@@ -86,6 +86,12 @@ The API has 19 endpoints across 6 categories:
 | Results | 3 |
 | **Total** | **19** |
 
+## References
+
+- Microsoft (2026) ASP.NET Core web API documentation. Available at: https://learn.microsoft.com/en-us/aspnet/core/web-api/ (Accessed: 22 September 2026).
+- Microsoft (2026) JWT bearer authentication in ASP.NET Core. Available at: https://learn.microsoft.com/en-us/aspnet/core/security/authentication/ (Accessed: 22 September 2026).
+- Fielding, R. (2000) *Architectural Styles and the Design of Network-based Software Architectures*. PhD thesis. University of California, Irvine.
+
 ---
 
 *Note: AI tools were used to assist with planning and drafting this document.*
