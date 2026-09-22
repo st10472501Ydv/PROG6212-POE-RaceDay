@@ -59,8 +59,13 @@ The GitHub Actions workflow (`.github/workflows/validate-docs.yml`) runs on ever
 - The API Endpoint Plan is present
 - The SQL script is present
 - The README exists
+- The SQL script has CREATE TABLE and INSERT statements
+- The ERD has Mermaid code
 
-<!-- PLACEHOLDER_FOR_CI_SCREENSHOT -->
+### CI Build Status
+
+<!-- Replace the line below with a screenshot of a successful green build -->
+![CI Build Status](docs/ci-build-screenshot.png)
 
 ## Video Presentation
 
