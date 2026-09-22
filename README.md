@@ -91,6 +91,13 @@ The video covers:
 - Running the SQL script live in SSMS
 - How the system is designed for both user roles
 
+### Video Requirements
+- Must be unlisted on YouTube
+- Must include voiceover explaining the code structure and design decisions
+- Must show the running application (or in this case, the database setup)
+- No AI-generated voices are allowed
+- Video link must be included in this README
+
 ## AI Disclosure
 
 AI tools were used to assist with planning and drafting documentation in this project.
