@@ -12,16 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/st10472501Ydv/RaceDay-POE.git"
+    "url": "git+https://github.com/st10472501Ydv/PROG6212-POE-RaceDay.git"
   },
   "keywords": ["raceday", "event-management", "south-africa", "running", "cycling"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/st10472501Ydv/RaceDay-POE/issues"
+    "url": "https://github.com/st10472501Ydv/PROG6212-POE-RaceDay/issues"
   },
-  "homepage": "https://github.com/st10472501Ydv/RaceDay-POE#readme",
+  "homepage": "https://github.com/st10472501Ydv/PROG6212-POE-RaceDay#readme",
   "dependencies": {
     "docx": "^9.7.1"
   }
