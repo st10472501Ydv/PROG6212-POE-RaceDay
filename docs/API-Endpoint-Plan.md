@@ -2,6 +2,16 @@
 
 This document lists all the API endpoints that the RaceDay system will expose. The API is built using C# with ASP.NET Core in Part 2 of this project.
 
+## Overview
+
+The API has 19 endpoints across 6 categories:
+- Authentication (2 endpoints) - register and login
+- User Profile (2 endpoints) - view and update profile
+- Events (5 endpoints) - CRUD operations for events
+- Categories (4 endpoints) - manage event categories
+- Enrolments (3 endpoints) - sign up for events
+- Results (3 endpoints) - capture and view race results
+
 ## Authentication Endpoints
 
 | HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
