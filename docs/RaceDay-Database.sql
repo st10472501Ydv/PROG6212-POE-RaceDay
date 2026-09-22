@@ -157,6 +157,8 @@ VALUES
     (3, '87km Down Run', 20000, 550.00);
 
 -- Insert Sample Enrolments
+-- Sipho (UserID = 3) has enrolled in 3 events
+-- Emily (UserID = 4) has enrolled in 3 events
 INSERT INTO Enrolments (ParticipantID, CategoryID, EnrolmentDate)
 VALUES
     (3, 1, '2026-04-01'),  -- Sipho in Soweto Marathon 42km
@@ -167,11 +169,12 @@ VALUES
     (3, 7, '2026-04-15');  -- Sipho in Comrades Up Run
 
 -- Insert Sample Results (for Soweto Marathon)
+-- Only the Soweto Marathon has results so far (the other events haven't happened yet)
 INSERT INTO Results (EnrolmentID, FinishTime, Position, Status)
 VALUES
-    (1, '03:45:22', 156, 'Finished'),
-    (3, '01:52:10', 89, 'Finished'),
-    (4, '00:58:33', 23, 'Finished');
+    (1, '03:45:22', 156, 'Finished'),   -- Sipho finished 42km in 3h 45m
+    (3, '01:52:10', 89, 'Finished'),    -- Emily finished 21km in 1h 52m
+    (4, '00:58:33', 23, 'Finished');    -- Emily finished 10km in 58min
 
 -- ============================================
 -- Verify the data
