@@ -51,8 +51,18 @@ The database has 6 tables:
 
 To set up the database:
 1. Open SQL Server Management Studio (SSMS)
-2. Open the file `docs/RaceDay-Database.sql`
-3. Run the script - it creates all tables and adds sample data
+2. Connect to your SQL Server instance
+3. Open the file `docs/RaceDay-Database.sql`
+4. Run the script - it creates all tables and adds sample data
+5. The script can be re-run safely (it drops tables first if they exist)
+
+The seed data includes:
+- 2 Organisers (Thabo and Nadia) with their club details
+- 2 Participants (Sipho and Emily)
+- 3 Events (Soweto Marathon, Cape Town Cycle Tour, Comrades Marathon)
+- 7 Categories across the 3 events
+- 6 Enrolments (3 per participant)
+- 3 Results from the Soweto Marathon
 
 ## CI/CD
 
