@@ -78,7 +78,6 @@ The GitHub Actions workflow (`.github/workflows/validate-docs.yml`) runs on ever
 
 ### CI Build Status
 
-<!-- Replace the line below with a screenshot of a successful green build -->
 ![CI Build Status](docs/ci-build-screenshot.png)
 
 ## Video Presentation
@@ -105,9 +104,15 @@ The video covers:
 - Microsoft (2026) ASP.NET Core web API documentation. Available at: https://learn.microsoft.com/en-us/aspnet/core/web-api/ (Accessed: 22 September 2026).
 - Mermaid (2026) Entity Relationship Diagrams. Available at: https://mermaid.js.org/syntax/entityRelationshipDiagram.html (Accessed: 22 September 2026).
 
-## AI Disclosure
+## AI Use Disclosure
 
-AI tools were used to assist with planning and drafting documentation in this project.
+As required by the brief, I disclose the parts of this project where AI tools were used:
+
+- **Proofreading and wording:** AI was used to check grammar and tighten up wording in the README and planning documents.
+- **Document formatting:** AI helped with the layout of the API endpoint table and with generating the Word version of the endpoint plan (`generate-docx.js`).
+- **Mermaid syntax:** AI helped fix a syntax error when rendering the ERD diagram to PNG.
+
+All design decisions are my own: the choice of the six entities and their attributes, the relationships and cardinality, the API routes and role rules, the SQL constraints, and the seed data. I reviewed and tested everything before committing.
 
 ---
 
