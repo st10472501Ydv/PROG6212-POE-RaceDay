@@ -105,6 +105,7 @@ CREATE TABLE Results (
 -- SEED DATA
 -- At minimum: 2 Organisers, 2 Participants,
 -- 3 Events, categories for each, sample enrolments
+-- The passwords are hashed values (not real passwords)
 -- ============================================
 
 -- Insert 2 Organisers
