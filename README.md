@@ -82,9 +82,6 @@ The GitHub Actions workflow (`.github/workflows/validate-docs.yml`) runs on ever
 
 ## Video Presentation
 
-<!-- Replace this link with your unlisted YouTube video link -->
-[Watch the Part 1 walkthrough video on YouTube](https://youtu.be/YOUR_VIDEO_ID_HERE)
-
 The video covers:
 - Walkthrough of the ERD and why I chose these entities
 - Explanation of the API endpoint plan
