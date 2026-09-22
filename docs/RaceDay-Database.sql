@@ -2,6 +2,13 @@
 -- RaceDay Database Script
 -- Creates the full schema for the RaceDay system
 -- Uses SQL Server Management Studio (SSMS)
+-- 
+-- This script:
+-- 1. Drops existing tables (if they exist)
+-- 2. Creates 6 tables with proper constraints
+-- 3. Inserts sample data for testing
+-- 
+-- Run this script on a fresh SQL Server instance
 -- ============================================
 
 -- Drop tables in reverse order of dependencies
