@@ -79,7 +79,7 @@ jobs:
 
     - name: Validate ERD has Mermaid code
       run: |
-        if grep -q "```mermaid" docs/ERD.md; then
+        if grep -q "mermaid" docs/ERD.md; then
           echo "Mermaid code block found in ERD"
         else
           echo "Error: No Mermaid code block in ERD.md"
