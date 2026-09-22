@@ -27,6 +27,7 @@ The system supports two user roles:
 RaceDay-POE/
 ├── docs/
 │   ├── ERD.md                    # Entity Relationship Diagram with Mermaid code
+│   ├── ERD.png                   # Rendered ERD image
 │   ├── API-Endpoint-Plan.md      # Full API endpoint specification
 │   ├── API-Endpoint-Plan.docx    # Word version of the API plan
 │   └── RaceDay-Database.sql      # SQL Server script to create and seed the database

@@ -86,6 +86,8 @@ After the event takes place, organisers capture the results. Each enrolment can 
 
 Copy the code below into a Mermaid renderer (like mermaid.live) to see the diagram.
 
+![RaceDay ERD](ERD.png)
+
 ```mermaid
 erDiagram
     USERS {
@@ -157,6 +159,9 @@ I used ON DELETE CASCADE on some foreign keys (like OrganiserDetails and Categor
 
 ## How to Render the ERD
 
+The rendered ERD image is included in this folder as `ERD.png`.
+
+To view or re-render it:
 1. Go to [mermaid.live](https://mermaid.live)
 2. Copy the Mermaid code from above
 3. Paste it into the editor
