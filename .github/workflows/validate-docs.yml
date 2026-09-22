@@ -94,5 +94,15 @@ jobs:
         fi
         echo "Word document found"
 
+    - name: Validate API plan has required columns
+      run: |
+        echo "Checking API endpoint plan for required columns..."
+        if grep -q "HTTP Method" docs/API-Endpoint-Plan.md && grep -q "Route" docs/API-Endpoint-Plan.md && grep -q "Description" docs/API-Endpoint-Plan.md && grep -q "Role Required" docs/API-Endpoint-Plan.md && grep -q "Request Body" docs/API-Endpoint-Plan.md && grep -q "Expected Response" docs/API-Endpoint-Plan.md; then
+          echo "All required columns found in API plan"
+        else
+          echo "Error: API plan is missing required columns"
+          exit 1
+        fi
+
     - name: All checks passed
       run: echo "All validation checks passed!"
