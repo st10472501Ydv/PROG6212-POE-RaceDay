@@ -84,6 +84,8 @@ After the event takes place, organisers capture the results. Each enrolment can 
 
 ## Mermaid ERD Code
 
+Copy the code below into a Mermaid renderer (like mermaid.live) to see the diagram.
+
 ```mermaid
 erDiagram
     USERS {
