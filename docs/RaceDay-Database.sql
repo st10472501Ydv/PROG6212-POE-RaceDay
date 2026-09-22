@@ -185,6 +185,7 @@ VALUES
 
 -- ============================================
 -- Verify the data
+-- Run these queries to check that everything was inserted correctly
 -- ============================================
 SELECT u.FullName, u.Role FROM Users u;
 SELECT e.EventName, c.CategoryName, c.EntryFee
@@ -192,6 +193,12 @@ FROM Events e
 JOIN Categories c ON e.EventID = c.EventID;
 SELECT u.FullName AS Participant, e.EventName, c.CategoryName
 FROM Enrolments en
+JOIN Users u ON en.ParticipantID = u.UserID
+JOIN Categories c ON en.CategoryID = c.CategoryID
+JOIN Events e ON c.EventID = e.EventID;
+SELECT u.FullName AS Participant, e.EventName, r.FinishTime, r.Position, r.Status
+FROM Results r
+JOIN Enrolments en ON r.EnrolmentID = en.EnrolmentID
 JOIN Users u ON en.ParticipantID = u.UserID
 JOIN Categories c ON en.CategoryID = c.CategoryID
 JOIN Events e ON c.EventID = e.EventID;
