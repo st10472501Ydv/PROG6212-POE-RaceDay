@@ -212,9 +212,12 @@ const doc = new Document({
 });
 
 // Generate the file
+// This creates a Word document with proper formatting, headers, footers, and footnotes
 Packer.toBuffer(doc).then(buffer => {
     fs.writeFileSync("docs/API-Endpoint-Plan.docx", buffer);
     console.log("Word document created: docs/API-Endpoint-Plan.docx");
+    console.log("File size: " + (buffer.length / 1024).toFixed(2) + " KB");
 }).catch(err => {
     console.error("Error creating document:", err);
+    process.exit(1);
 });
