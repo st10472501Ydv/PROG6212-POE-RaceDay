@@ -111,7 +111,7 @@ AI tools were used to assist with planning and drafting documentation in this pr
 
 ---
 
-**Student:** [Your Name]
+**Student:** Yadav Iserbelas
 **Student Number:** st10472501
 **Module:** INSY
 **Date:** September 2026

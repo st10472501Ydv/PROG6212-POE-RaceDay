@@ -169,11 +169,11 @@ VALUES
 INSERT INTO Enrolments (ParticipantID, CategoryID, EnrolmentDate)
 VALUES
     (3, 1, '2026-04-01'),  -- Sipho in Soweto Marathon 42km
-    (3, 5, '2026-04-05'),  -- Sipho in Cape Town Cycle 109km
+    (3, 5, '2026-04-05'),  -- Sipho in Cape Town Cycle 62km
     (4, 2, '2026-04-02'),  -- Emily in Soweto Marathon 21km
     (4, 3, '2026-04-10'),  -- Emily in Soweto Marathon 10km
-    (4, 6, '2026-04-12'),  -- Emily in Cape Town Cycle 62km
-    (3, 7, '2026-04-15');  -- Sipho in Comrades Up Run
+    (4, 6, '2026-04-12'),  -- Emily in Comrades 89km Up Run
+    (3, 7, '2026-04-15');  -- Sipho in Comrades 87km Down Run
 
 -- Insert Sample Results (for Soweto Marathon)
 -- Only the Soweto Marathon has results so far (the other events haven't happened yet)
