@@ -36,6 +36,7 @@ public class RaceDayContext : DbContext
         // OrganiserDetails - the PK is also the FK to Users, so no auto-increment
         b.Entity<OrganiserDetail>(e =>
         {
+            e.HasKey(x => x.OrganiserID);
             e.Property(x => x.OrganiserID).ValueGeneratedNever();
             e.Property(x => x.ClubName).HasMaxLength(100);
             e.Property(x => x.PhoneNumber).HasMaxLength(20);
