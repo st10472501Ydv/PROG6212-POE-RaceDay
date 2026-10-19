@@ -101,6 +101,12 @@ The API implements every row of `docs/API-Endpoint-Plan.md` (22 endpoints).
    The 31 tests use an in-memory database, so they run without SQL Server installed — the same
    reason CI on GitHub can run them.
 
+### Screenshots
+
+Swagger UI — every endpoint with its description (from the XML comments):
+
+![Swagger UI with all 22 endpoints](docs/swagger-screenshot.png)
+
 ### Design notes
 
 - **Code-first model, no EF migrations.** The schema and seed data come from the Part 1 SQL script,
