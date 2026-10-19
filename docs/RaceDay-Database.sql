@@ -57,6 +57,8 @@ CREATE TABLE Events (
     Description NVARCHAR(1000) NULL,
     EventDate DATETIME NOT NULL,
     Location NVARCHAR(200) NOT NULL,
+    Distance NVARCHAR(50) NOT NULL,
+    EventType NVARCHAR(20) NOT NULL CHECK (EventType IN ('Run', 'Walk', 'Cycle')),
     IsActive BIT NOT NULL DEFAULT 1,
     CONSTRAINT FK_Events_Users FOREIGN KEY (OrganiserID)
         REFERENCES Users(UserID) ON DELETE NO ACTION
@@ -137,11 +139,11 @@ VALUES
 -- Event 1 is created by Thabo (OrganiserID = 1)
 -- Event 2 is created by Nadia (OrganiserID = 2)
 -- Event 3 is also by Thabo
-INSERT INTO Events (OrganiserID, EventName, Description, EventDate, Location, IsActive)
+INSERT INTO Events (OrganiserID, EventName, Description, EventDate, Location, Distance, EventType, IsActive)
 VALUES
-    (1, 'Soweto Marathon 2026', 'Annual marathon through the streets of Soweto. 42km, 21km and 10km options.', '2026-11-15', 'Soweto, Johannesburg', 1),
-    (2, 'Cape Town Cycle Tour', 'The biggest single-day cycling event in the world. Routes around the Cape Peninsula.', '2026-10-08', 'Cape Town Stadium, Cape Town', 1),
-    (1, 'Comrades Marathon 2027', 'The Ultimate Human Race. Pietermaritzburg to Durban.', '2027-06-13', 'Pietermaritzburg to Durban', 1);
+    (1, 'Soweto Marathon 2026', 'Annual marathon through the streets of Soweto. 42km, 21km and 10km options.', '2026-11-15', 'Soweto, Johannesburg', '42.2km', 'Run', 1),
+    (2, 'Cape Town Cycle Tour', 'The biggest single-day cycling event in the world. Routes around the Cape Peninsula.', '2026-10-08', 'Cape Town Stadium, Cape Town', '109km', 'Cycle', 1),
+    (1, 'Comrades Marathon 2027', 'The Ultimate Human Race. Pietermaritzburg to Durban.', '2027-06-13', 'Pietermaritzburg to Durban', '89km', 'Run', 1);
 
 -- Insert Categories for Event 1 (Soweto Marathon)
 -- Three distance options with different entry fees and capacity limits

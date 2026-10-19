@@ -39,6 +39,8 @@ All the races and events that organisers create.
 | Description | NVARCHAR(1000) | Can be null |
 | EventDate | DATETIME | Not null |
 | Location | NVARCHAR(200) | Not null |
+| Distance | NVARCHAR(50) | Not null (e.g. "42.2km") |
+| EventType | NVARCHAR(20) | Run, Walk or Cycle |
 | IsActive | BIT | Default = 1 |
 
 ### 4. Categories
@@ -113,6 +115,8 @@ erDiagram
         string Description
         datetime EventDate
         string Location
+        string Distance
+        string EventType
         int IsActive
     }
 
@@ -157,6 +161,8 @@ The Role field in Users is a simple string. I thought about making a separate Ro
 The UQ_ParticipantCategory unique constraint on Enrolments stops a participant from enrolling in the same category twice. This makes sense because you would not want to pay for the same race twice.
 
 I used ON DELETE CASCADE on some foreign keys (like OrganiserDetails and Categories) so that when you delete a parent record, the child records go with it. But I did not use cascade on Events because if you delete an organiser, you probably still want to keep the events they created.
+
+The `Distance` and `EventType` columns on Events were added at the start of Part 2. Re-reading the brief, it says every event must capture a distance and an event type (run, walk or cycle), and the Part 1 version of this diagram did not have them. The ERD, the SQL script and the endpoint plan were all updated together so the three still match.
 
 ## How to Render the ERD
 

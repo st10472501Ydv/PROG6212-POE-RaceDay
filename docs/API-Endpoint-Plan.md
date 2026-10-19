@@ -4,26 +4,27 @@ This document lists all the API endpoints that the RaceDay system will expose. T
 
 ## Overview
 
-The API has 19 endpoints across 6 categories:
-- Authentication (2 endpoints) - register and login
+The API has 22 endpoints across 6 categories:
+- Authentication (3 endpoints) - register, login and logout
 - User Profile (2 endpoints) - view and update profile
 - Events (5 endpoints) - CRUD operations for events
 - Categories (4 endpoints) - manage event categories
-- Enrolments (3 endpoints) - sign up for events
-- Results (3 endpoints) - capture and view race results
+- Enrolments (4 endpoints) - sign up for events and view enrolments
+- Results (4 endpoints) - capture and view race results
 
 ## Authentication Endpoints
 
 | HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
 |-------------|-------|-------------|---------------|--------------|-------------------|
 | POST | /api/auth/register | Creates a new user account. The user picks whether they are an Organiser or Participant during signup. | None (public) | `{ "fullName": "string", "email": "string", "password": "string", "role": "Organiser or Participant" }` | 201 Created - returns the new user ID and a success message. 400 Bad Request - if email is already taken or fields are missing. |
-| POST | /api/auth/login | Signs the user in and returns a JWT token they use for authenticated requests. | None (public) | `{ "email": "string", "password": "string" }` | 200 OK - returns a JWT token and user info. 401 Unauthorized - if email or password is wrong. |
+| POST | /api/auth/login | Signs the user in. The server creates a session that stores the user's ID and role, and sends back a session cookie that the client uses for authenticated requests. | None (public) | `{ "email": "string", "password": "string" }` | 200 OK - starts the session and returns the user's ID, name and role. 401 Unauthorized - if email or password is wrong. |
+| POST | /api/auth/logout | Signs the user out by clearing their session on the server. | Any (logged in) | None | 200 OK - session cleared. 401 Unauthorized - if the user is not logged in. |
 
 ## User Profile Endpoints
 
 | HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
 |-------------|-------|-------------|---------------|--------------|-------------------|
-| GET | /api/users/profile | Gets the profile of the user who is currently logged in. | Any (logged in) | None | 200 OK - returns the user's name, email, role, and date joined. 401 Unauthorized - if no valid token. |
+| GET | /api/users/profile | Gets the profile of the user who is currently logged in. | Any (logged in) | None | 200 OK - returns the user's name, email, role, and date joined. 401 Unauthorized - if not logged in. |
 | PUT | /api/users/profile | Lets the user update their name and email. | Any (logged in) | `{ "fullName": "string", "email": "string" }` | 200 OK - returns updated profile. 400 Bad Request - if the new email is already taken. 401 Unauthorized - if not logged in. |
 
 ## Events Endpoints
@@ -31,9 +32,9 @@ The API has 19 endpoints across 6 categories:
 | HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
 |-------------|-------|-------------|---------------|--------------|-------------------|
 | GET | /api/events | Returns a list of all active events. Anyone can see what events are coming up. | None (public) | None | 200 OK - returns an array of events with their basic info (name, date, location). |
-| POST | /api/events | Creates a new event. Only organisers can do this, and the event gets linked to their account. | Organiser | `{ "eventName": "string", "description": "string", "eventDate": "datetime", "location": "string" }` | 201 Created - returns the new event with its ID. 400 Bad Request - if required fields are missing. 403 Forbidden - if a Participant tries to create an event. |
+| POST | /api/events | Creates a new event. Only organisers can do this, and the event gets linked to their account. | Organiser | `{ "eventName": "string", "description": "string", "eventDate": "datetime", "location": "string", "distance": "string", "eventType": "Run, Walk or Cycle" }` | 201 Created - returns the new event with its ID. 400 Bad Request - if required fields are missing. 403 Forbidden - if a Participant tries to create an event. |
 | GET | /api/events/{id} | Gets the full details of one event, including all its categories. | None (public) | None | 200 OK - returns event details with categories array. 404 Not Found - if the event does not exist. |
-| PUT | /api/events/{id} | Updates an event's details. Only the organiser who created it can do this. | Organiser | `{ "eventName": "string", "description": "string", "eventDate": "datetime", "location": "string" }` | 200 OK - returns the updated event. 403 Forbidden - if the user is not the organiser who created the event. 404 Not Found - if the event does not exist. |
+| PUT | /api/events/{id} | Updates an event's details. Only the organiser who created it can do this. | Organiser | `{ "eventName": "string", "description": "string", "eventDate": "datetime", "location": "string", "distance": "string", "eventType": "Run, Walk or Cycle" }` | 200 OK - returns the updated event. 403 Forbidden - if the user is not the organiser who created the event. 404 Not Found - if the event does not exist. |
 | DELETE | /api/events/{id} | Deletes an event. This also removes all its categories and enrolments. Only the organiser who created it can do this. | Organiser | None | 204 No Content - if deleted successfully. 403 Forbidden - if the user is not the owner. 404 Not Found - if the event does not exist. |
 
 ## Categories Endpoints
@@ -52,6 +53,7 @@ The API has 19 endpoints across 6 categories:
 | POST | /api/categories/{categoryId}/enrol | Lets a participant sign up for a category. The system checks if the category is full before allowing it. | Participant | None | 201 Created - returns the enrolment with a confirmation message. 409 Conflict - if the participant is already enrolled or the category is full. 403 Forbidden - if an Organiser tries to enrol. 404 Not Found - if the category does not exist. |
 | GET | /api/users/enrolments | Shows all the events a participant has signed up for. | Participant | None | 200 OK - returns an array of enrolments with event and category details. 401 Unauthorized - if not logged in. |
 | DELETE | /api/enrolments/{id} | Cancels an enrolment. The participant can only cancel their own enrolments. | Participant | None | 204 No Content - if cancelled. 403 Forbidden - if trying to cancel someone else's enrolment. 404 Not Found - if the enrolment does not exist. |
+| GET | /api/events/{eventId}/enrolments | Lists every enrolment for one of the organiser's own events, with the participant and category details. This is how an organiser sees who entered their event. | Organiser | None | 200 OK - returns an array of enrolments for that event. 403 Forbidden - if the organiser did not create the event. 404 Not Found - if the event does not exist. |
 
 ## Results Endpoints
 
@@ -60,17 +62,19 @@ The API has 19 endpoints across 6 categories:
 | GET | /api/events/{eventId}/results | Shows the results for an event, sorted by position. | None (public) | None | 200 OK - returns results with participant name, finish time, and position. 404 Not Found - if the event does not exist. |
 | POST | /api/events/{eventId}/results | Adds a result for a participant. Only the event's organiser can do this. | Organiser | `{ "enrolmentId": 0, "finishTime": "HH:MM:SS", "position": 0, "status": "Finished" }` | 201 Created - returns the result. 400 Bad Request - if the enrolment ID is invalid. 403 Forbidden - if not the event's organiser. 409 Conflict - if a result already exists for this enrolment. 404 Not Found - if the event does not exist. |
 | PUT | /api/results/{id} | Updates a result. Only the event's organiser can do this. | Organiser | `{ "finishTime": "HH:MM:SS", "position": 0, "status": "Finished" }` | 200 OK - returns the updated result. 403 Forbidden - if not the organiser. 404 Not Found - if the result does not exist. |
+| GET | /api/users/results | Shows the logged-in user's own race results across every event they entered, so a participant can follow their personal performance history. | Any (logged in) | None | 200 OK - returns an array of the user's results with event and category details. 401 Unauthorized - if not logged in. |
 
 ## Notes on the API Design
 
 - All routes start with `/api/` to keep things consistent.
-- The system uses JWT tokens for authentication. The token is passed in the `Authorization` header as `Bearer <token>`.
+- The system uses server-side sessions for authentication. When a user logs in, the server stores their user ID and role in the session and sends back a session cookie. Every authenticated request carries that cookie.
 - Role-based access is checked at the API level. If a Participant tries to access an Organiser-only endpoint, they get a 403 Forbidden response.
 - I kept the routes pretty simple and readable. The nesting makes it clear which event a category or result belongs to.
 - The DELETE endpoints return 204 No Content instead of 200 because there is nothing to send back.
 - Error responses include a message that explains what went wrong so the front-end can show it to the user.
-- The login endpoint returns a JWT token that must be included in all authenticated requests.
-- Public endpoints (like GET /api/events) can be accessed by anyone, even without a token.
+- Every event stores a distance (e.g. "42.2km") and an event type (Run, Walk or Cycle), because the brief requires it.
+- The login endpoint starts the session that must be present in all authenticated requests. Logging out clears the session on the server.
+- Public endpoints (like GET /api/events) can be accessed by anyone, even without logging in.
 - Organiser endpoints check that the user owns the resource before allowing changes.
 - Participant endpoints check that the user is only modifying their own enrolments.
 
@@ -78,18 +82,18 @@ The API has 19 endpoints across 6 categories:
 
 | Category | Number of Endpoints |
 |----------|-------------------|
-| Authentication | 2 |
+| Authentication | 3 |
 | User Profile | 2 |
 | Events | 5 |
 | Categories | 4 |
-| Enrolments | 3 |
-| Results | 3 |
-| **Total** | **19** |
+| Enrolments | 4 |
+| Results | 4 |
+| **Total** | **22** |
 
 ## References
 
 - Microsoft (2026) ASP.NET Core web API documentation. Available at: https://learn.microsoft.com/en-us/aspnet/core/web-api/ (Accessed: 22 September 2026).
-- Microsoft (2026) JWT bearer authentication in ASP.NET Core. Available at: https://learn.microsoft.com/en-us/aspnet/core/security/authentication/ (Accessed: 22 September 2026).
+- Microsoft (2026) Session state in ASP.NET Core. Available at: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state (Accessed: 19 October 2026).
 - Fielding, R. (2000) *Architectural Styles and the Design of Network-based Software Architectures*. PhD thesis. University of California, Irvine.
 
 ---

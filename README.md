@@ -65,6 +65,17 @@ The seed data includes:
 - 6 Enrolments (3 per participant)
 - 3 Results from the Soweto Marathon
 
+## Plan Changes (added during Part 2)
+
+The Part 1 plan stayed as the specification for the API. Four things were added to `docs/API-Endpoint-Plan.md` before any code was written, and three of them come straight from the brief's functional requirements:
+
+- `GET /api/events/{eventId}/enrolments` - the brief says Organisers must be able to view all enrolments for their events.
+- `GET /api/users/results` - the brief says Participants must be able to view their own results.
+- `POST /api/auth/logout` - sessions need a way to end.
+- The login entry now describes a server-side session (the server stores the user ID and role) instead of a JWT, because that is what Part 2 requires.
+
+The `Events` table in `docs/RaceDay-Database.sql` also gained `Distance` and `EventType` columns, and the ERD was updated to match, because the brief says every event must capture a distance and an event type (run, walk or cycle). Total endpoints: 19 -> 22.
+
 ## CI/CD
 
 The GitHub Actions workflow (`.github/workflows/validate-docs.yml`) runs on every push and checks that:
