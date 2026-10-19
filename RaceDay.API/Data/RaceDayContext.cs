@@ -27,7 +27,7 @@ public class RaceDayContext : DbContext
             e.Property(x => x.PasswordHash).IsRequired().HasMaxLength(255);
             e.Property(x => x.Role).IsRequired().HasMaxLength(20);
             e.Property(x => x.DateJoined).HasDefaultValueSql("GETDATE()");
-            e.HasCheckConstraint("CK_Users_Role", "Role IN ('Organiser', 'Participant')");
+            e.ToTable("Users", t => t.HasCheckConstraint("CK_Users_Role", "Role IN ('Organiser', 'Participant')"));
             e.HasOne(x => x.OrganiserDetail).WithOne(x => x.User)
              .HasForeignKey<OrganiserDetail>(x => x.OrganiserID)
              .OnDelete(DeleteBehavior.Cascade);
@@ -52,7 +52,7 @@ public class RaceDayContext : DbContext
             e.Property(x => x.Distance).IsRequired().HasMaxLength(50);
             e.Property(x => x.EventType).IsRequired().HasMaxLength(20);
             e.Property(x => x.IsActive).HasDefaultValue(true);
-            e.HasCheckConstraint("CK_Events_EventType", "EventType IN ('Run', 'Walk', 'Cycle')");
+            e.ToTable("Events", t => t.HasCheckConstraint("CK_Events_EventType", "EventType IN ('Run', 'Walk', 'Cycle')"));
             // NO ACTION in the SQL script: deleting an organiser keeps their events
             e.HasOne(x => x.Organiser).WithMany(x => x.Events)
              .HasForeignKey(x => x.OrganiserID)
@@ -65,7 +65,7 @@ public class RaceDayContext : DbContext
             e.Property(x => x.CategoryName).IsRequired().HasMaxLength(100);
             e.Property(x => x.MaxParticipants).HasDefaultValue(0);
             e.Property(x => x.EntryFee).HasColumnType("decimal(10,2)").HasDefaultValue(0m);
-            e.HasCheckConstraint("CK_MaxParticipants", "MaxParticipants >= 0");
+            e.ToTable("Categories", t => t.HasCheckConstraint("CK_MaxParticipants", "MaxParticipants >= 0"));
             e.HasOne(x => x.Event).WithMany(x => x.Categories)
              .HasForeignKey(x => x.EventID)
              .OnDelete(DeleteBehavior.Cascade);
@@ -90,7 +90,7 @@ public class RaceDayContext : DbContext
             e.HasIndex(x => x.EnrolmentID).IsUnique();
             e.Property(x => x.FinishTime).HasColumnType("time(7)");
             e.Property(x => x.Status).IsRequired().HasMaxLength(20).HasDefaultValue("Finished");
-            e.HasCheckConstraint("CK_Results_Status", "Status IN ('Finished', 'DNF', 'Disqualified')");
+            e.ToTable("Results", t => t.HasCheckConstraint("CK_Results_Status", "Status IN ('Finished', 'DNF', 'Disqualified')"));
             e.HasOne(x => x.Enrolment).WithOne(x => x.Result)
              .HasForeignKey<Result>(x => x.EnrolmentID)
              .OnDelete(DeleteBehavior.Cascade);
