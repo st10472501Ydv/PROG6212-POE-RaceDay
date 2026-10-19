@@ -1,0 +1,99 @@
+### RaceDay API sample requests (VS Code REST Client / similar).
+### Base URL assumes `dotnet run --project RaceDay.API` (http://localhost:5220).
+### Sessions are cookies: after each /login the session cookie is replaced,
+### so log in again before switching between the organiser and participant flows.
+
+### 1. Browse events - works without logging in
+GET http://localhost:5220/api/events
+
+### 2. Register an organiser
+POST http://localhost:5220/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Demo Organiser",
+  "email": "demo-organiser@raceday.co.za",
+  "password": "Demo123!",
+  "role": "Organiser"
+}
+
+### 3. Register a participant
+POST http://localhost:5220/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Demo Participant",
+  "email": "demo-participant@raceday.co.za",
+  "password": "Demo123!",
+  "role": "Participant"
+}
+
+### 4. Log in as the organiser (server sets the session cookie)
+POST http://localhost:5220/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo-organiser@raceday.co.za",
+  "password": "Demo123!"
+}
+
+### 5. Create an event (organiser session)
+POST http://localhost:5220/api/events
+Content-Type: application/json
+
+{
+  "eventName": "Demo 10K",
+  "description": "A demo run",
+  "eventDate": "2026-12-05T09:00:00",
+  "location": "Campus Park",
+  "distance": "10km",
+  "eventType": "Run"
+}
+
+### 6. Add a category to event 1 (organiser session)
+POST http://localhost:5220/api/events/1/categories
+Content-Type: application/json
+
+{
+  "categoryName": "10km Open",
+  "maxParticipants": 100,
+  "entryFee": 50
+}
+
+### 7. See the organiser's own event enrolments
+GET http://localhost:5220/api/events/1/enrolments
+
+### 8. Capture a result for enrolment 1 (organiser session)
+POST http://localhost:5220/api/events/1/results
+Content-Type: application/json
+
+{
+  "enrolmentId": 1,
+  "finishTime": "00:45:30",
+  "position": 1,
+  "status": "Finished"
+}
+
+### 9. Log in as the participant (replaces the session cookie)
+POST http://localhost:5220/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo-participant@raceday.co.za",
+  "password": "Demo123!"
+}
+
+### 10. Enrol in category 1 (participant session)
+POST http://localhost:5220/api/categories/1/enrol
+
+### 11. Own enrolments (participant session)
+GET http://localhost:5220/api/users/enrolments
+
+### 12. Own results (any logged-in user)
+GET http://localhost:5220/api/users/results
+
+### 13. Own profile (any logged-in user)
+GET http://localhost:5220/api/users/profile
+
+### 14. Log out - the session cookie no longer works after this
+POST http://localhost:5220/api/auth/logout
