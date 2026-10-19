@@ -77,13 +77,13 @@ The seed data includes:
 Note: the seeded users keep the placeholder password hashes from Part 1, so they cannot be used to
 log into the API. Register a new account through the API instead.
 
-## Part 2 — The REST API
+## Part 2: The REST API
 
 The API implements every row of `docs/API-Endpoint-Plan.md` (22 endpoints).
 
 ### How to run it
 
-1. Create the database first (see the Database section above) — the API maps onto those tables.
+1. Create the database first (see the Database section above). The API maps onto those tables.
 2. Check the connection string in `RaceDay.API/appsettings.json`. It is set to
    `Server=localhost\SQLEXPRESS;Database=RaceDayDB;Trusted_Connection=True;TrustServerCertificate=True;`
    (Windows auth). Change the server name if your SQL Server instance has a different one.
@@ -98,12 +98,12 @@ The API implements every row of `docs/API-Endpoint-Plan.md` (22 endpoints).
    ```
    dotnet test RaceDay.slnx
    ```
-   The 31 tests use an in-memory database, so they run without SQL Server installed — the same
-   reason CI on GitHub can run them.
+   The 31 tests use an in-memory database, so they run without SQL Server installed, which is
+   the same reason CI on GitHub can run them.
 
 ### Screenshots
 
-Swagger UI — every endpoint with its description (from the XML comments):
+Swagger UI, showing every endpoint with its description (from the XML comments):
 
 ![Swagger UI with all 22 endpoints](docs/swagger-screenshot.png)
 
@@ -173,7 +173,7 @@ As required by the brief, I disclose the parts of this project where AI tools we
 - **Proofreading and wording:** AI was used to check grammar and tighten up wording in the README and planning documents.
 - **Document formatting:** AI helped with the layout of the API endpoint table and with generating the Word version of the endpoint plan (`generate-docx.js`).
 - **Mermaid syntax:** AI helped fix a syntax error when rendering the ERD diagram to PNG.
-- **Part 2 API code (new):** AI helped draft the controller, model, filter, hashing and test code and helped debug two issues (the OrganiserDetails primary key and swapping the database provider in the test factory). I decided the design myself — the session-based auth instead of JWT, the PBKDF2 password hashing, the role and ownership rules, the error codes and the test list — based on the brief and the plan. I ran every endpoint live against the database (35 end-to-end checks) and ran the test suite before every commit, and I reviewed the code and the plan row by row before committing it.
+- **Part 2 API code (new):** AI helped draft the controller, model, filter, hashing and test code and helped debug two issues (the OrganiserDetails primary key and swapping the database provider in the test factory). I decided the design myself (the session-based auth instead of JWT, the PBKDF2 password hashing, the role and ownership rules, the error codes and the test list) based on the brief and the plan. I ran every endpoint live against the database (35 end-to-end checks) and ran the test suite before every commit, and I reviewed the code and the plan row by row before committing it.
 
 All design decisions are my own: the choice of the six entities and their attributes, the relationships and cardinality, the API routes and role rules, the SQL constraints, and the seed data. I reviewed and tested everything before committing.
 
