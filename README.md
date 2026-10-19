@@ -52,18 +52,18 @@ RaceDay-POE/
 
 The database has 6 tables:
 
-1. **Users** - All user accounts (Organisers and Participants)
-2. **OrganiserDetails** - Extra info for Organiser users
-3. **Events** - All races and events
-4. **Categories** - Distance categories for each event
-5. **Enrolments** - When participants sign up for a category
-6. **Results** - Finish times and positions after events
+1. `Users`: all user accounts (organisers and participants)
+2. `OrganiserDetails`: extra info for organiser users
+3. `Events`: all races and events
+4. `Categories`: distance categories for each event
+5. `Enrolments`: when participants sign up for a category
+6. `Results`: finish times and positions after events
 
 To set up the database:
 1. Open SQL Server Management Studio (SSMS)
 2. Connect to your SQL Server instance
 3. Open the file `docs/RaceDay-Database.sql`
-4. Run the script - it creates all tables and adds sample data
+4. Run the script; it creates all tables and adds sample data
 5. The script can be re-run safely (it drops tables first if they exist)
 
 The seed data includes:
@@ -98,8 +98,8 @@ The API implements every row of `docs/API-Endpoint-Plan.md` (22 endpoints).
    ```
    dotnet test RaceDay.slnx
    ```
-   The 31 tests use an in-memory database, so they run without SQL Server installed, which is
-   the same reason CI on GitHub can run them.
+   The 31 tests use an in-memory database, so they run without SQL Server installed, and CI on
+   GitHub can run them too.
 
 ### Screenshots
 
@@ -109,25 +109,25 @@ Swagger UI, showing every endpoint with its description (from the XML comments):
 
 ### Design notes
 
-- **Code-first model, no EF migrations.** The schema and seed data come from the Part 1 SQL script,
-  so the database matches the ERD exactly. The entity classes and `RaceDayContext` only map onto
-  those tables (keys, unique constraints, defaults, check constraints and delete rules mirror the
-  script). If the schema ever changes, edit the script and the entities together.
-- **Server-side sessions, not JWT.** Login stores the user's ID and role in the session on the
-  server and sends a session cookie. `SessionAuthAttribute` protects the endpoints: no session
+- The model is code-first with no EF migrations. The schema and seed data come from the Part 1 SQL
+  script, so the database matches the ERD exactly. The entity classes and `RaceDayContext` only map
+  onto those tables (keys, unique constraints, defaults, check constraints and delete rules mirror
+  the script). If the schema ever changes, edit the script and the entities together.
+- Login uses server-side sessions instead of JWT. The server stores the user's ID and role in the
+  session and sends a session cookie. `SessionAuthAttribute` protects the endpoints: no session
   returns 401, the wrong role (or someone else's data) returns 403.
-- **Passwords are hashed** with PBKDF2 (SHA-256, 100 000 iterations, random salt per user) and
+- Passwords are hashed with PBKDF2 (SHA-256, 100 000 iterations, random salt per user) and
   compared in constant time. Plain passwords are never stored or logged.
-- **Errors follow one pattern everywhere:** 400 bad body, 401 not logged in, 403 wrong role or not
-  the owner, 404 missing id, 409 duplicate enrolment / full category / duplicate result.
+- Errors follow one pattern everywhere: 400 bad body, 401 not logged in, 403 wrong role or not
+  the owner, 404 missing id, 409 duplicate enrolment, full category or duplicate result.
 
 ## Plan Changes (added during Part 2)
 
 The Part 1 plan stayed as the specification for the API. Four things were added to `docs/API-Endpoint-Plan.md` before any code was written, and three of them come straight from the brief's functional requirements:
 
-- `GET /api/events/{eventId}/enrolments` - the brief says Organisers must be able to view all enrolments for their events.
-- `GET /api/users/results` - the brief says Participants must be able to view their own results.
-- `POST /api/auth/logout` - sessions need a way to end.
+- `GET /api/events/{eventId}/enrolments`: the brief says Organisers must be able to view all enrolments for their events.
+- `GET /api/users/results`: the brief says Participants must be able to view their own results.
+- `POST /api/auth/logout`: sessions need a way to end.
 - The login entry now describes a server-side session (the server stores the user ID and role) instead of a JWT, because that is what Part 2 requires.
 
 The `Events` table in `docs/RaceDay-Database.sql` also gained `Distance` and `EventType` columns, and the ERD was updated to match, because the brief says every event must capture a distance and an event type (run, walk or cycle). Total endpoints: 19 -> 22.
